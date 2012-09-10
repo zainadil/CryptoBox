@@ -175,8 +175,6 @@ public class CryptoBox extends JFrame {
 					fos.close();
 				}
 			} catch (Exception ex) {
-
-				// Do Nothing, if it no work, it no work
 			}
 		}
 	}
@@ -192,15 +190,13 @@ public class CryptoBox extends JFrame {
 				}
 
 			} catch (Exception ex) {
-
-				// Do Nothing, if it no work, it no work
 			}
 		}
 	}
 
 	private String getFileExtension(String fileName) {
 		// Handle the case where there is no extension, if file has less than 3
-		// character in its name, it has either no name (only an extension, for
+		// characters in its name, it has either no name (only an extension, for
 		// example a '.c') or no extension
 		if (fileName.length() < 3 || fileName.indexOf(".") == -1)
 			return "";
