@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -42,6 +43,9 @@ public class CryptoBox extends JFrame {
 	private EncryptHandler encryptHandler;
 	private DecryptHandler decryptHandler;
 	private openFileHandler openFileHandler;
+
+	// Salt
+	private static String salt = "nfkotnfn23rx1";
 
 	public CryptoBox() {
 		passwordLabel = new JLabel("  Enter Encryption/Decryption Key: ",
@@ -69,9 +73,7 @@ public class CryptoBox extends JFrame {
 		Container pane = getContentPane();
 		pane.setLayout(new GridLayout(3, 2));
 
-		// Add components to the pane in the order you want them to appear (left
-		// to
-		// right, top to bottom)
+		// Add components to the pane in the order you want them to appear (left to right, top to bottom)
 		pane.add(passwordLabel);
 		pane.add(passwordTextBox);
 		pane.add(openFileButton);
@@ -91,17 +93,19 @@ public class CryptoBox extends JFrame {
 				passwordTextBox.setText("");
 				String fileName = filePathTextField.getText().trim();
 
+				// Get the extension of the file.
 				String fileExtension = getFileExtension(fileName);
 				FileInputStream fstream = new FileInputStream(fileName);
 
 				// Get the Key
-				String salt = "nfkotnfn23rx1";
 				byte[] saltArray = salt.getBytes();
 				char[] key = (passKey).toCharArray();
-				SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-				KeySpec ks = new PBEKeySpec(key, saltArray, 100000, 128);
+				SecretKeyFactory f = SecretKeyFactory
+						.getInstance("PBKDF2WithHmacSHA1");
+				KeySpec ks = new PBEKeySpec(key, saltArray, 1000000, 128);
 				SecretKey s = f.generateSecret(ks);
-				SecretKeySpec secretKeySpec = new SecretKeySpec(s.getEncoded(), "AES");
+				SecretKeySpec secretKeySpec = new SecretKeySpec(s.getEncoded(),
+						"AES");
 
 				// Instantiate the cipher
 				cipher = Cipher.getInstance("AES");
@@ -130,10 +134,8 @@ public class CryptoBox extends JFrame {
 					fos.close();
 				}
 			} catch (Exception ex) {
-
-				// Do Nothing, if it no work, it no work
+				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
 			}
-
 		}
 	}
 
@@ -147,14 +149,16 @@ public class CryptoBox extends JFrame {
 				// Get the extension of the file.
 				String fileExtension = getFileExtension(fileName);
 				FileInputStream fstream = new FileInputStream(fileName);
+
 				// Get the Key
-				String salt = "nfkotnfn23rx1";
 				byte[] saltArray = salt.getBytes();
 				char[] key = (passKey).toCharArray();
-				SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-				KeySpec ks = new PBEKeySpec(key, saltArray, 100000, 128);
+				SecretKeyFactory f = SecretKeyFactory
+						.getInstance("PBKDF2WithHmacSHA1");
+				KeySpec ks = new PBEKeySpec(key, saltArray, 1000000, 128);
 				SecretKey s = f.generateSecret(ks);
-				SecretKeySpec secretKeySpec = new SecretKeySpec(s.getEncoded(), "AES");
+				SecretKeySpec secretKeySpec = new SecretKeySpec(s.getEncoded(),
+						"AES");
 
 				// Instantiate the cipher
 				cipher = Cipher.getInstance("AES");
@@ -182,6 +186,7 @@ public class CryptoBox extends JFrame {
 					fos.close();
 				}
 			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -197,6 +202,7 @@ public class CryptoBox extends JFrame {
 				}
 
 			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
