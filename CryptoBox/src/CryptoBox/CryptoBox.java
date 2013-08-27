@@ -8,9 +8,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.security.MessageDigest;
+import java.security.spec.KeySpec;
 import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -91,11 +95,13 @@ public class CryptoBox extends JFrame {
 				FileInputStream fstream = new FileInputStream(fileName);
 
 				// Get the Key
-				byte[] key = (passKey).getBytes();
-				MessageDigest sha = MessageDigest.getInstance("SHA-1");
-				key = sha.digest(key);
-				key = Arrays.copyOf(key, 16); // use only first 128 bit
-				SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
+				String salt = "nfkotnfn23rx1";
+				byte[] saltArray = salt.getBytes();
+				char[] key = (passKey).toCharArray();
+				SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+				KeySpec ks = new PBEKeySpec(key, saltArray, 100000, 128);
+				SecretKey s = f.generateSecret(ks);
+				SecretKeySpec secretKeySpec = new SecretKeySpec(s.getEncoded(), "AES");
 
 				// Instantiate the cipher
 				cipher = Cipher.getInstance("AES");
@@ -142,12 +148,13 @@ public class CryptoBox extends JFrame {
 				String fileExtension = getFileExtension(fileName);
 				FileInputStream fstream = new FileInputStream(fileName);
 				// Get the Key
-				byte[] key = (passKey).getBytes();
-
-				MessageDigest sha = MessageDigest.getInstance("SHA-1");
-				key = sha.digest(key);
-				key = Arrays.copyOf(key, 16); // use only first 128 bit
-				SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
+				String salt = "nfkotnfn23rx1";
+				byte[] saltArray = salt.getBytes();
+				char[] key = (passKey).toCharArray();
+				SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+				KeySpec ks = new PBEKeySpec(key, saltArray, 100000, 128);
+				SecretKey s = f.generateSecret(ks);
+				SecretKeySpec secretKeySpec = new SecretKeySpec(s.getEncoded(), "AES");
 
 				// Instantiate the cipher
 				cipher = Cipher.getInstance("AES");
