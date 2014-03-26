@@ -7,9 +7,9 @@ AES Encryption/Decryption App -
 ![CryptoBox Image](/CryptoBoxIMG.jpg "CryptoBox")
 
 ##Tech Stack:
-Java 6
-JCE (Java Cryptography Extension)
-Java Swing
+-Java 6
+-JCE (Java Cryptography Extension)
+-Java Swing
 
 ##To Install
 
@@ -22,6 +22,6 @@ javac CryptoBox/CryptoBox.java
 ```java
 java CryptoBox/CryptoBox
 ```
-Make sure you run the program from a directory other than the Directory that contains the class files
+Make sure you run the program from a directory above or other than the directory that contains the class files
 
 Here's why : http://docs.oracle.com/javase/tutorial/uiswing/start/compile.html
