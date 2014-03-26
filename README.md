@@ -8,9 +8,7 @@ AES Encryption/Decryption App -
 
 ##Tech Stack:
 -Java 6
-
 -JCE (Java Cryptography Extension)
-
 -Java Swing
 
 ##To Install
