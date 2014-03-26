@@ -6,9 +6,11 @@ AES Encryption/Decryption App -
 
 ![CryptoBox Image](/CryptoBoxIMG.jpg "CryptoBox")
 
-####Tech Stack:
+##Tech Stack:
 -Java 6
+
 -JCE (Java Cryptography Extension)
+
 -Java Swing
 
 ##To Install
