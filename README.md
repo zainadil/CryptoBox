@@ -1,7 +1,5 @@
 ##CryptoBox
 
-blogpost http://zainadil.com/cryptobox/
-
 ![CryptoBox Image](/CryptoBoxIMG.jpg "CryptoBox")
 
 ##What
