@@ -1,5 +1,7 @@
-CryptoBox
-========+
+##CryptoBox
+
+blogpost http://zainadil.com/cryptobox/
+
 
 ![CryptoBox Image](/CryptoBoxIMG.jpg "CryptoBox")
 
@@ -26,8 +28,6 @@ java CryptoBox/CryptoBox
 ```
 
 ###Notes
-This program makes use of the Base64 library added in Java 1.8 and hence requires Java 8.
-
 Make sure you run the program from a directory above or other than the directory that contains the class files
 
 Here's why : http://docs.oracle.com/javase/tutorial/uiswing/start/compile.html
