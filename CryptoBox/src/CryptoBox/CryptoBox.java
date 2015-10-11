@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.util.Base64;
 
 public class CryptoBox extends JFrame {
 
@@ -124,17 +126,23 @@ public class CryptoBox extends JFrame {
 					if (!saveName.contains(fileExtension))
 						saveName += fileExtension;
 
-					FileOutputStream fos = new FileOutputStream(new File(
-							saveName));
+					ByteArrayOutputStream encryptionStream = new  ByteArrayOutputStream();
 
 					int i;
-					while ((i = cipherIn.read()) != -1)
-						fos.write(i);
+					while ((i = cipherIn.read()) != -1){
+						encryptionStream.write(i);
+					}
 					cipherIn.close();
+
+					byte[] encodedBytes = Base64.getEncoder().encode(encryptionStream.toByteArray());
+					FileOutputStream fos = new FileOutputStream(new File(
+							saveName));
+					fos.write(encodedBytes);
 					fos.close();
 				}
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(),
+					"Exception", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -164,8 +172,10 @@ public class CryptoBox extends JFrame {
 				cipher = Cipher.getInstance("AES");
 				cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
 
-				CipherInputStream cipherIn = new CipherInputStream(fstream,
-						cipher);
+				byte[] encryptedBytes = new byte[fstream.available()];
+				fstream.read(encryptedBytes);
+				CipherInputStream cipherIn = new CipherInputStream(new ByteArrayInputStream(
+					Base64.getDecoder().decode(encryptedBytes)), cipher);
 
 				// Open dialog box and choose the location to save the decrypted
 				// file.
@@ -186,7 +196,8 @@ public class CryptoBox extends JFrame {
 					fos.close();
 				}
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(),
+					"Exception", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -202,7 +213,8 @@ public class CryptoBox extends JFrame {
 				}
 
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(), "Exception", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, ex.getLocalizedMessage(),
+					"Exception", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
