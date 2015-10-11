@@ -8,7 +8,7 @@ CryptoBox is an AES based Encyrption/Decryption app that utilizes 128-Bit AES fo
 
 ###Tech Stack
 
-- Java6
+- Java 8 (Program utilizes Base64 library added in Java 1.8)
 - Java Cryptography Extension (JCE)
 - Java Swing
 
@@ -25,8 +25,6 @@ java CryptoBox/CryptoBox
 ```
 
 ###Notes
-
-Requires Java 8 (Program utilizes Base64 library added in Java 1.8)
 
 Make sure you run the program from a directory above or other than the directory that contains the class files
 
