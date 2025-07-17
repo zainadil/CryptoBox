@@ -15,17 +15,17 @@ CryptoBox is an AES based Encyrption/Decryption app that utilizes 128-Bit AES fo
 ### To Install
 
 ```java
-javac CryptoBox/CryptoBox.java
+javac CryptoBox/src/CryptoBox/CryptoBox.java
 ```
 
 ### Running the Program 
 
 ```java
-java CryptoBox/CryptoBox
+java CryptoBox.CryptoBox
 ```
 
 ### Notes
 
-Make sure you run the program from a directory above or other than the directory that contains the class files
+Run these commands from the directory that contains the `CryptoBox` folder (one level above `CryptoBox/`).
 
 Here's why : http://docs.oracle.com/javase/tutorial/uiswing/start/compile.html
