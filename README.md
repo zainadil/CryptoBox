@@ -4,7 +4,7 @@
 
 ## What
 
-CryptoBox is an AES based Encyrption/Decryption app that utilizes 128-Bit AES for file encryption and decryption. Currenly all file formats are supported, but there's no support for folders/directories. CryptoBox utilizes PBKDF2 with SHA-1 with a million iterations to generate the AES key from the user password.
+CryptoBox is an AES based Encryption/Decryption app that utilizes 128-Bit AES for file encryption and decryption. Currently all file formats are supported, but there's no support for folders/directories. CryptoBox utilizes PBKDF2 with SHA-1 with a million iterations to generate the AES key from the user password.
 
 ### Tech Stack
 
